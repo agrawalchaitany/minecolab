@@ -95,11 +95,18 @@ else:
 ```
 ---
 
-## **🔌Register Key SHA256 Fingerprint**
- ⚠️Must register if you want longer duration of tunnelling service.
--Important Note: Please include only your key fingerprint, for example: A27Jcya7a+IE+qAEUZBWExENVnwug0IWgskGqcH1zU0. Do not include the "SHA256:" prefix or "User@DESKTOP" 
- suffix.
-- key will be found at location : '/content/drive/My Drive/Minecraft-server/ssh_keys/id_rsa_fingerprint.txt'
+## 🔌 Register Key SHA256 Fingerprint
+
+⚠️ **Important:** You must register the fingerprint if you want a longer duration of tunneling service.
+
+**Note:** Please include only your key fingerprint. For example: `A27Jcya7a+IE+qAEUZBWExENVnwug0IWgskGqcH1zU0`.  
+Do **not** include the "SHA256:" prefix or the "User@DESKTOP" suffix.
+
+### Find Your Key:
+- The key can be found at the following location:
+  ```
+  /content/drive/My Drive/Minecraft-server/ssh_keys/id_rsa_fingerprint.txt
+  ```
 ---
 
 ## 🎮 Server Configuration
