@@ -92,7 +92,7 @@ if tunnel_service == "nglocalhost":
 
 else:
     print("⚠️ No tunneling service selected. Server will run locally.")
-
+```
 ---
 
 ##🔌Register Key SHA256 Fingerprint
