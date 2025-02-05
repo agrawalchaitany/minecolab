@@ -107,6 +107,10 @@ Do **not** include the "SHA256:" prefix or the "User@DESKTOP" suffix.
   ```
   /content/drive/My Drive/Minecraft-server/ssh_keys/id_rsa_fingerprint.txt
   ```
+- Register the key at:
+  ```
+  https://nglocalhost.com/subdomain/registration
+  ```
 ---
 
 ## 🎮 Server Configuration
