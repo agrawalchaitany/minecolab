@@ -69,11 +69,11 @@ def generate_ssh_key(key_path):
 ```
 ---
 
-#### **8. Connect to the Server**
+#### **8. Connect to the tunnel**
 Use a tunneling service such as **nglocalhost** , **pinggy**:
 ```python
 # 🌍 Setup tunneling service
-tunnel_service = "nglocalhost"  # Can be changed to "playit.gg" if needed
+tunnel_service = "nglocalhost"  # Can be changed to "pinggy" if needed
 print(f"\n🌍 Using {tunnel_service} for server tunneling...")
 
 # 🔌 Establishing the tunnel
@@ -108,7 +108,7 @@ else:
 
 ## 🔌 Register Key SHA256 Fingerprint
 
-⚠️ **Important:** You must register the fingerprint if you want a longer duration of tunneling service.
+⚠️ **Important:** You must register the fingerprint if you want a longer duration of tunneling service on **nglocalhost**.
 
 **Note:** Please include only your key fingerprint. For example: `A27Jcya7a+IE+qAEUZBWExENVnwug0IWgskGqcH1zU0`.  
 Do **not** include the "SHA256:" prefix or the "User@DESKTOP" suffix.
@@ -136,7 +136,10 @@ You can edit `server.properties` to customize settings like:
 - **Server not starting?** Check Java version and server logs.
 - **Tunneling not working?** Restart Colab ,rerun the script and check tunnel_log.txt.
 - **High latency?** Google Colab may throttle resources.
-
+- **Note:** tunnel_log.txt can be found at following location:
+  ```
+  /content/drive/My Drive/Minecraft-server/tunnel_log.txt
+  ```
 ---
 
 ## 📜 License
