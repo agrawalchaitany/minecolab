@@ -56,39 +56,50 @@ echo 'eula=true' > eula.txt
 !java -Xms1G -Xmx2G -jar server.jar nogui
 ```
 
-#### **7. Connect to the Server**
-Use a tunneling service such as **nglocalhost**:
+#### **7. Generate SSH key if missing**
+```python
+key_path = "/content/drive/My Drive/Minecraft-server/ssh_keys/id_rsa"
+def generate_ssh_key(key_path):
+    
+    if not os.path.isfile(key_path):
+        os.makedirs(os.path.dirname(key_path), exist_ok=True)
+        os.system(f"ssh-keygen -t rsa -b 4096 -f '{key_path}' -N '' -q")
+        os.system(f"chmod 400 '{key_path}'")
+        os.system(f"ssh-keygen -lf '{key_path}.pub' > '{key_path}_fingerprint.txt'")
+```
+---
+
+#### **8. Connect to the Server**
+Use a tunneling service such as **nglocalhost** , **pinggy**:
 ```python
 # 🌍 Setup tunneling service
 tunnel_service = "nglocalhost"  # Can be changed to "playit.gg" if needed
 print(f"\n🌍 Using {tunnel_service} for server tunneling...")
 
 # 🔌 Establishing the tunnel
-if tunnel_service == "nglocalhost":
-    print("\n🔌 Setting up nglocalhost tunneling...")
-        # Generate SSH key if missing
-    if not os.path.isfile("/content/drive/My Drive/Minecraft-server/ssh_keys/id_rsa"):
-        os.system("mkdir -p '/content/drive/My Drive/Minecraft-server/ssh_keys'")  # Create directory
-        os.system("ssh-keygen -t rsa -b 4096 -f '/content/drive/My Drive/Minecraft-server/ssh_keys/id_rsa' -N '' -q")  # Generate SSH key
-        os.system("chmod 400 '/content/drive/My Drive/Minecraft-server/ssh_keys/id_rsa'")  # Change permissions
-        os.system("ssh-keygen -lf '/content/drive/My Drive/Minecraft-server/ssh_keys/id_rsa.pub' > '/content/drive/My Drive/Minecraft-server/ssh_keys/id_rsa_fingerprint.txt'" )
+if tunnel_service == "nglocalhost":    
+    
+    # ⏳ Generate SSH key if missing
+    generate_ssh_key(key_path)
 
     # Establish tunnel
     print("⏳ Establishing tunnel, please wait...")
     os.system("nohup ssh -T -o StrictHostKeyChecking=no -i '/content/drive/My Drive/Minecraft-server/ssh_keys/id_rsa' -R minecraft03127:25565:localhost:25565 nglocalhost.com > tunnel_log.txt 2>&1 &")
-
+    url_pattern=r"(nglocalhost:[^\s]+)"
     # Wait for tunnel to establish
     time.sleep(10)
 
-    # Extract and display the tunnel URL
-    with open("tunnel_log.txt", "r") as log_file:
-        log_content = log_file.read()
-        match = re.search(r"(nglocalhost[^\s]+)", log_content)  # Extract first URL
-        if match:
-            tunnel_url = match.group(0)
-            print(f"✅ Tunnel established! Access your Minecraft server at:\n🌍 {tunnel_url}")
-        else:
-            print("⚠️ Could not extract tunnel URL. Check 'tunnel_log.txt' manually.")
+elif tunnel_service == "pinggy":    
+
+    # ⏳ Generate SSH key if missing
+    generate_ssh_key(key_path)
+
+    # Establish tunnel
+    print("⏳ Establishing tunnel, please wait...")
+    os.system("nohup ssh -p 443 -o StrictHostKeyChecking=no -o ServerAliveInterval=30 -R0:127.0.0.1:25565 tcp@ap.a.pinggy.io > tunnel_log.txt 2>&1 &")
+    url_pattern=r"(tcp://[^\s]+)"
+    # Wait for tunnel to establish
+    time.sleep(10)
 
 else:
     print("⚠️ No tunneling service selected. Server will run locally.")
@@ -107,7 +118,7 @@ Do **not** include the "SHA256:" prefix or the "User@DESKTOP" suffix.
   ```
   /content/drive/My Drive/Minecraft-server/ssh_keys/id_rsa_fingerprint.txt
   ```
-- Register the key at:
+- Register the key at if tunnel_service is **nglocalhost** :
   ```
   https://nglocalhost.com/subdomain/registration
   ```
@@ -123,7 +134,7 @@ You can edit `server.properties` to customize settings like:
 
 ## ❓ Troubleshooting
 - **Server not starting?** Check Java version and server logs.
-- **Nglocalhost not working?** Restart Colab and rerun the script.
+- **Tunneling not working?** Restart Colab ,rerun the script and check tunnel_log.txt.
 - **High latency?** Google Colab may throttle resources.
 
 ---
