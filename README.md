@@ -1,6 +1,21 @@
-# Minecraft Server on Google Colab
+<p align="center"><a href="https://github.com/agrawalchaitany/minecolab"><img src="" alt="Logo" height="80"/></a></p>
+<h1 align="center">MineColab</h1>
+<p align="center">Run Minecraft Server on Google Colab</p>
+<h1 align="center">This project sets up a **Minecraft server** (Paper, Fabric, Forge, or Purpur) on **Google Colab** using a cloud-based environment. The setup includes Google Drive integration for persistent storage, Java installation, and tunneling for external access.</h1>
+<a href="https://colab.research.google.com/github/agrawalchaitany/minecolab/blob/main/minecolab.ipynb" target="_parent"><img align="right" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a>
 
-This project sets up a **Minecraft server** (Paper, Fabric, Forge, or Purpur) on **Google Colab** using a cloud-based environment. The setup includes Google Drive integration for persistent storage, Java installation, and tunneling for external access.
+
+## 🙉 what is google Colab?
+As the official FAQ says, colaboratory, or “Colab” for short, is a product from Google Research. Colab allows anybody to write and execute arbitrary python code through the browser, and is especially well suited to machine learning, data analysis and education. More technically, Colab is a hosted Jupyter notebook service that requires no setup to use, while providing free access to computing resources including GPUs.
+In short, it is a vm provided for learning, running python code, machine learning or for general purpose.
+
+---
+
+## 💰 Is it really free to use?
+Yes, Colab is free to use. But there are some points which, according to me one should keep in mind:
+1. Though colab is a free service, it shouldn't be exploited indiscriminately or without any care. One should value that its a resource offered for no cost and can get depleted/restricted if the demand increases out of control.
+2. If it isn't obvious, one shouldn't run mission-critical services (like large and important servers/databases/python programs) on it. Its resources are not guaranteed and not unlimited, and the usage limits sometimes fluctuate. Also, the notebook has a maximum runtime of 12 hours, after which, it should be manually restarted.
+3. If you need to use it pretty often for intensive tasks, consider purchasing a vps server. A heavy increase in server load would force google to close the service.
 
 ---
 
@@ -14,101 +29,43 @@ This project sets up a **Minecraft server** (Paper, Fabric, Forge, or Purpur) on
 
 ## 🔧 Setup Instructions
 
-### 1️⃣ Prerequisites
-- A **Google account** to use Google Colab
-- A **Minecraft server JAR file** (Paper, Fabric, Forge, or Purpur)
-- **Google Drive storage** (optional but recommended)
+1. Open the notebook in google colab.
+2. Read through the notebook, most of the code is self explanatory. Run the cells which are useful for your use-case.
+3. Run the second cell which runs the Minecraft server.
+4. Now you have two options. You can either use Nglocalhost or Pinggy. 
+    - Nglocalhost:  Provides a simple and secure way to expose localhost to the internet with minimal setup.
+    - Pinggy: Offers lightweight, fast, and disposable public URLs for quick local server exposure.
+  * Nglocalhost:
+      1. Change `tunnel_service` variable .
+      2. You must register the fingerprint if you want a longer duration of tunneling service.
+      **Note:** Please include only your key fingerprint. For example: `A27Jcya7a+IE+qAEUZBWExENVnwug0IWgskGqcH1zU0`.  
+        - Do **not** include the "SHA256:" prefix or the "User@DESKTOP" suffix
+        - The key can be found at the following location:
+          ```
+          /content/drive/My Drive/Minecraft-server/ssh_keys/id_rsa_fingerprint.txt
+          ```
+        - Register the key [here](https://nglocalhost.com/subdomain/registration)
+         
+  * Pinggy:
+      1. Change `tunnel_service` variable and follow the script.
 
-### 2️⃣ Steps to Run the Server
-#### **1. Open Google Colab**
-- Navigate to [Google Colab](https://colab.research.google.com/)
-- Upload the Python script containing the server setup
-
-#### **2. Mount Google Drive (Optional, but recommended)**
-```python
-from google.colab import drive
-drive.mount('/content/drive')
-```
-This ensures that server data is saved persistently.
-
-#### **3. Install Java**
-```python
-!apt-get update && apt-get install openjdk-17-jdk -y
-```
-
-#### **4. Download and Set Up the Server**
-Choose the server type:
-```python
-!wget -O server.jar <URL_TO_SERVER_JAR>
-```
-For example, for **Paper**:
-```python
-!wget -O server.jar https://papermc.io/api/v2/projects/paper/versions/1.20.1/builds/latest/downloads/paper-1.20.1.jar
-```
-
-#### **5. Accept EULA**
-```python
-echo 'eula=true' > eula.txt
-```
-
-#### **6. Start the Server**
-```python
-!java -Xms1G -Xmx2G -jar server.jar nogui
-```
-
-#### **7. Generate SSH key if missing**
-```python
-key_path = "/content/drive/My Drive/Minecraft-server/ssh_keys/id_rsa"
-def generate_ssh_key(key_path):
-    
-    if not os.path.isfile(key_path):
-        os.makedirs(os.path.dirname(key_path), exist_ok=True)
-        os.system(f"ssh-keygen -t rsa -b 4096 -f '{key_path}' -N '' -q")
-        os.system(f"chmod 400 '{key_path}'")
-        os.system(f"ssh-keygen -lf '{key_path}.pub' > '{key_path}_fingerprint.txt'")
-```
 ---
 
-#### **8. Connect to the tunnel**
-Use a tunneling service such as **nglocalhost** , **pinggy**:
-```python
-# 🌍 Setup tunneling service
-tunnel_service = "nglocalhost"  # Can be changed to "pinggy" if needed
-print(f"\n🌍 Using {tunnel_service} for server tunneling...")
+## ⚡ So, how does it actually work?
+As Google Colab is a VM running Ubuntu server as base OS, it can be easily used as a Minecraft server. Here are the steps which the notebook performs to setup the server:
+1. Update the system's apt cache.
+2. Install Openjdk-21 (Java) through apt-get.
+3. Mount Google Drive to access the minecraft folder (Drive is used here to provide persistent storage).
+4. Setup Nglocalhost or Pinggy Tunnel (Opening a tunnel at port 25565) depending on the `tunnel_service` variable.
+5. Change directory to the minecraft-server folder on google drive ("Minecraft-server" is the default, located in the root directory of my Google Drive.)
+6. List/Print the file list on the screen to indicate succesful directory change.
+7. Startup the Minecraft server (with optimized JVM parameters from [Aikar's guide)](https://aikar.co/2018/07/02/tuning-the-jvm-g1gc-garbage-collector-flags-for-minecraft/)
 
-# 🔌 Establishing the tunnel
-if tunnel_service == "nglocalhost":    
-    
-    # ⏳ Generate SSH key if missing
-    generate_ssh_key(key_path)
-
-    # Establish tunnel
-    print("⏳ Establishing tunnel, please wait...")
-    os.system("nohup ssh -T -o StrictHostKeyChecking=no -i '/content/drive/My Drive/Minecraft-server/ssh_keys/id_rsa' -R minecraft03127:25565:localhost:25565 nglocalhost.com > tunnel_log.txt 2>&1 &")
-    url_pattern=r"(nglocalhost:[^\s]+)"
-    # Wait for tunnel to establish
-    time.sleep(10)
-
-elif tunnel_service == "pinggy":    
-
-    # ⏳ Generate SSH key if missing
-    generate_ssh_key(key_path)
-
-    # Establish tunnel
-    print("⏳ Establishing tunnel, please wait...")
-    os.system("nohup ssh -p 443 -o StrictHostKeyChecking=no -o ServerAliveInterval=30 -R0:127.0.0.1:25565 tcp@ap.a.pinggy.io > tunnel_log.txt 2>&1 &")
-    url_pattern=r"(tcp://[^\s]+)"
-    # Wait for tunnel to establish
-    time.sleep(10)
-
-else:
-    print("⚠️ No tunneling service selected. Server will run locally.")
-```
 ---
 
 ## 🔌 Register Key SHA256 Fingerprint
 
-⚠️ **Important:** You must register the fingerprint if you want a longer duration of tunneling service on **nglocalhost**.
+⚠️ **Important:** You must register the fingerprint if you want a longer duration of tunneling service.
 
 **Note:** Please include only your key fingerprint. For example: `A27Jcya7a+IE+qAEUZBWExENVnwug0IWgskGqcH1zU0`.  
 Do **not** include the "SHA256:" prefix or the "User@DESKTOP" suffix.
@@ -139,7 +96,14 @@ You can edit `server.properties` to customize settings like:
 - **Note:** tunnel_log.txt can be found at following location:
   ```
   /content/drive/My Drive/Minecraft-server/tunnel_log.txt
-  ```
+  ``
+---
+
+## 👍 Tips
+- If something does not work, try reading [Nglocalhost](https://nglocalhost.com/) or [pinggy](https://pinggy.io/)
+- Switch between the different tunnel providers and see which works best for you.
+- Make regular backups of your world.
+- For more Tunneling alternatives read [here](https://pinggy.io/blog/best_ngrok_alternatives/)
 ---
 
 ## 📜 License
