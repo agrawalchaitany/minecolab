@@ -1,4 +1,4 @@
-<p align="center"><a href="https://github.com/agrawalchaitany/minecolab"><img src="landscapelogo.png" alt="Logo" height="450" width="900"/></a></p>
+<p align="center"><a href="https://github.com/agrawalchaitany/minecolab"><img src="Minecolab_logo.png" alt="Logo" height="450" width="900"/></a></p>
 <h1 align="center">MineColab</h1>
 <p align="center">Run Minecraft Server on Google Colab</p>
 <p align="left">This project sets up a <b>Minecraft server</b> (Paper, Fabric, Forge, or Purpur) on <b>Google Colab</b> using a cloud-based environment. The setup includes Google Drive integration for persistent storage, Java installation, and tunneling for external access.</p>
