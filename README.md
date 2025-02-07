@@ -1,7 +1,7 @@
-<p align="center"><a href="https://github.com/agrawalchaitany/minecolab"><img src="" alt="Logo" height="80"/></a></p>
+<p align="center"><a href="https://github.com/agrawalchaitany/minecolab"><img src="landscapelogo.png" alt="Logo" height="450" width="900"/></a></p>
 <h1 align="center">MineColab</h1>
 <p align="center">Run Minecraft Server on Google Colab</p>
-<h1 align="center">This project sets up a **Minecraft server** (Paper, Fabric, Forge, or Purpur) on **Google Colab** using a cloud-based environment. The setup includes Google Drive integration for persistent storage, Java installation, and tunneling for external access.</h1>
+<p align="left">This project sets up a <b>Minecraft server</b> (Paper, Fabric, Forge, or Purpur) on <b>Google Colab</b> using a cloud-based environment. The setup includes Google Drive integration for persistent storage, Java installation, and tunneling for external access.</p>
 <a href="https://colab.research.google.com/github/agrawalchaitany/minecolab/blob/main/minecolab.ipynb" target="_parent"><img align="right" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a>
 
 
@@ -38,14 +38,14 @@ Yes, Colab is free to use. But there are some points which, according to me one 
   * Nglocalhost:
       1. Change `tunnel_service` variable .
       2. You must register the fingerprint if you want a longer duration of tunneling service.
-      **Note:** Please include only your key fingerprint. For example: `A27Jcya7a+IE+qAEUZBWExENVnwug0IWgskGqcH1zU0`.  
-        - Do **not** include the "SHA256:" prefix or the "User@DESKTOP" suffix
-        - The key can be found at the following location:
-          ```
-          /content/drive/My Drive/Minecraft-server/ssh_keys/id_rsa_fingerprint.txt
-          ```
-        - Register the key [here](https://nglocalhost.com/subdomain/registration)
-         
+    
+    **Note:** Please include only your key fingerprint. For example: `A27Jcya7a+IE+qAEUZBWExENVnwug0IWgskGqcH1zU0`.  
+    - Do **not** include the "SHA256:" prefix or the "User@DESKTOP" suffix. 
+    - Register the key [here](https://nglocalhost.com/subdomain/registration)  
+    - The key can be found at the following location:
+      ```
+      /content/drive/My Drive/Minecraft-server/ssh_keys/id_rsa_fingerprint.txt
+      ```
   * Pinggy:
       1. Change `tunnel_service` variable and follow the script.
 
@@ -96,7 +96,7 @@ You can edit `server.properties` to customize settings like:
 - **Note:** tunnel_log.txt can be found at following location:
   ```
   /content/drive/My Drive/Minecraft-server/tunnel_log.txt
-  ``
+  ```
 ---
 
 ## 👍 Tips
