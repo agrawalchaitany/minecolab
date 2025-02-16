@@ -100,7 +100,9 @@ You can edit `server.properties` to customize settings like:
 ---
 
 ## 👍 Tips
-- If something does not work, try reading [Nglocalhost](https://nglocalhost.com/) or [pinggy](https://pinggy.io/)
+- If you are using server fabric , Most mods will also require you to install [Fabric API](https://www.curseforge.com/minecraft/mc-mods/fabric-api) into the mods folder.
+- If Failed to download server , try reading [PaperMc](https://docs.papermc.io/misc/downloads-api) | [Fabricmc](https://fabricmc.net/use/server/)
+- If Tunnel_service does not work, try reading [Nglocalhost](https://nglocalhost.com/) or [pinggy](https://pinggy.io/)
 - Switch between the different tunnel providers and see which works best for you.
 - Make regular backups of your world.
 - For more Tunneling alternatives read [here](https://pinggy.io/blog/best_ngrok_alternatives/)
