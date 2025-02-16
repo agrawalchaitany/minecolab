@@ -3,6 +3,7 @@
 <p align="center">Run Minecraft Server on Google Colab</p>
 <p align="left">This project sets up a <b>Minecraft server</b> (Paper, Fabric, Forge, or Purpur) on <b>Google Colab</b> using a cloud-based environment. The setup includes Google Drive integration for persistent storage, Java installation, and tunneling for external access.</p>
 <a href="https://colab.research.google.com/github/agrawalchaitany/minecolab/blob/main/minecolab.ipynb" target="_parent"><img align="right" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a>
+<meta name="google-site-verification" content="jEiXc2hgMeg4S4JORpONRnUZ9HpwK_IsA45XV6Z7QVY" />
 
 
 ## 🙉 what is google Colab?
