@@ -115,5 +115,5 @@ This project is open-source. Feel free to modify and improve!
 ---
 
 ## 🙌 Acknowledgments
-Developed by Chaitany Agrawal 🚀
-This project was inspired by [MineColab] ([https://github.com/thecoder-001/MineColab.git]). While the core idea remains similar, all code and implementation details have been independently developed.
+- Developed by Chaitany Agrawal 🚀
+- This project was inspired by [MineColab](https://github.com/thecoder-001/MineColab.git). While the core idea remains similar, all code and implementation details have been independently developed.
