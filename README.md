@@ -107,6 +107,7 @@ You can edit `server.properties` to customize settings like:
 - Switch between the different tunnel providers and see which works best for you.
 - Make regular backups of your world.
 - For more Tunneling alternatives read [here](https://pinggy.io/blog/best_ngrok_alternatives/)
+- If you want to make your own Server , try reading [here](https://minecraft.fandom.com/wiki/Tutorials/Setting_up_a_server)
 ---
 
 ## 📜 License
